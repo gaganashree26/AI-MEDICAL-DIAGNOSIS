@@ -1,56 +1,69 @@
-# 🧠 AI Medical Based Diagnosis Assitant Using Machine Learning
+# 🧠 AI Medical Based Diagnosis Assistant Using Machine Learning
 
-This is a smart healthcare web application that predicts diseases based on symptoms using Machine Learning.
+This is a smart healthcare web application that predicts diseases based on user symptoms using Machine Learning.
 
 ---
 
 ## 🚀 Features
 
-- Disease prediction using symptoms  
-- Voice input support  
-- Multilingual support  
-- Emergency ambulance feature  
-- Hospital information  
-- User dashboard  
+* Disease prediction based on symptoms
+* Voice input support
+* Multilingual support
+* Emergency ambulance feature
+* Hospital information system
+* User dashboard
 
 ---
 
-## 🛠 Tech Used
+## 🛠 Tech Stack
 
-- Python (Django)
-- HTML, CSS, JavaScript
-- Machine Learning
+* Python (Django)
+* HTML, CSS, JavaScript
+* Machine Learning
 
 ---
 
 ## ⚙️ How to Run
-1. Download the project
 
-2. Open terminal
+### 1. Download the Project
 
-  Install Dependencies
-  cd AI_MedAssist
+```bash
+git clone https://github.com/gaganashree26/AI-FAKE-REVIEW-DETECTOR.git
+cd AI-FAKE-REVIEW-DETECTOR
+```
 
-  pip install -r requirements.txt
-  
-  Train ML Models
-  cd models
+### 2. Install Dependencies
 
-  python model_training.py
+```bash
+pip install -r requirements.txt
+```
 
-  cd ..
+### 3. Train Machine Learning Model
 
-  Setup Django
-  cd backend
+```bash
+cd models
+python model_training.py
+cd ..
+```
 
-  python manage.py makemigrations users diagnosis ambulance hospitals
+### 4. Setup Django Backend
 
-  python manage.py migrate
+```bash
+cd backend
+python manage.py makemigrations users diagnosis ambulance hospitals
+python manage.py migrate
+python manage.py shell < seed_data.py
+```
 
-  python manage.py shell < seed_data.py
+### 5. Run the Server
 
-  Run Server
-
-  python manage.py runserver
+```bash
+python manage.py runserver
+```
 
 ---
+
+## 👩‍💻 Author
+
+**Gaganashree P**
+Project Repository: https://github.com/gaganashree26/AI-MEDICAL-DIAGNOSIS.git
