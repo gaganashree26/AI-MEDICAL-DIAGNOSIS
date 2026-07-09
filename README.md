@@ -63,4 +63,4 @@ python manage.py runserver
 
 ---
 ## Project Repository
-https://github.com/gaganashree26/AI-MEDICAL-DIAGNOSIS.git
+https://github.com/gaganashree26/AI-MEDICAL-DIAGNOSIS.git 
