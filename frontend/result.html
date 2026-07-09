@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Results | AI MedAssist</title>
+    <meta name="description" content="AI MedAssist diagnosis results - View your disease prediction, confidence score, and recommended precautions.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; min-height: 100vh; }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(110,231,249,0.15); position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 20px; font-weight: 700; color: #006874; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-brand .material-icons { color: #5cd7e9; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { text-decoration: none; color: #3d494b; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #006874; }
+
+        .main { max-width: 1000px; margin: 0 auto; padding: 48px 24px; }
+
+        /* Result Header */
+        .result-header { text-align: center; margin-bottom: 40px; }
+        .result-header .disease-name { font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #006874, #5cd7e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+        .result-header .result-desc { color: #6d797c; font-size: 15px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+        /* Confidence Ring */
+        .confidence-section { display: flex; justify-content: center; margin-bottom: 40px; }
+        .confidence-ring { width: 180px; height: 180px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .confidence-ring svg { position: absolute; transform: rotate(-90deg); }
+        .confidence-ring .score { font-size: 36px; font-weight: 800; color: #006874; }
+        .confidence-ring .label { font-size: 12px; color: #6d797c; }
+
+        /* Cards */
+        .card { background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border: 1px solid rgba(110,231,249,0.2); border-radius: 20px; padding: 28px; box-shadow: 0 10px 30px -5px rgba(110,231,249,0.1); margin-bottom: 24px; }
+        .card h3 { font-size: 18px; font-weight: 600; color: #006874; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .card h3 .material-icons { font-size: 22px; }
+
+        /* Symptoms analyzed */
+        .symptom-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip { padding: 6px 14px; background: linear-gradient(135deg, rgba(110,231,249,0.12), rgba(167,139,250,0.08)); border: 1px solid rgba(110,231,249,0.25); border-radius: 20px; font-size: 13px; font-weight: 500; color: #006874; }
+
+        /* Precautions */
+        .precaution-list { list-style: none; }
+        .precaution-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(110,231,249,0.1); }
+        .precaution-item:last-child { border-bottom: none; }
+        .precaution-icon { width: 36px; height: 36px; background: rgba(110,231,249,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .precaution-icon .material-icons { font-size: 18px; color: #006874; }
+        .precaution-text { font-size: 14px; line-height: 1.5; color: #3d494b; }
+
+        /* Secondary predictions */
+        .secondary-list { display: grid; gap: 12px; }
+        .secondary-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(110,231,249,0.05); border-radius: 12px; }
+        .secondary-item .name { font-size: 14px; font-weight: 500; }
+        .secondary-item .score { font-size: 14px; font-weight: 700; color: #006874; }
+
+        /* Severity badge */
+        .severity-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .severity-low { background: rgba(34,197,94,0.12); color: #16a34a; }
+        .severity-medium { background: rgba(245,158,11,0.12); color: #d97706; }
+        .severity-high { background: rgba(239,68,68,0.12); color: #dc2626; }
+        .severity-critical { background: rgba(220,38,38,0.2); color: #b91c1c; }
+
+        /* Urgent care banner */
+        .urgent-banner { background: linear-gradient(135deg, rgba(186,26,26,0.08), rgba(255,107,107,0.08)); border: 1px solid rgba(186,26,26,0.2); border-radius: 16px; padding: 20px 24px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; display: none; }
+        .urgent-banner.show { display: flex; }
+        .urgent-banner .material-icons { font-size: 32px; color: #ba1a1a; }
+        .urgent-banner p { font-size: 14px; color: #93000a; line-height: 1.5; }
+
+        /* Disclaimer */
+        .disclaimer { background: rgba(110,231,249,0.06); border: 1px solid rgba(110,231,249,0.15); border-radius: 14px; padding: 20px; margin-top: 32px; }
+        .disclaimer h4 { font-size: 13px; font-weight: 600; color: #006874; margin-bottom: 6px; }
+        .disclaimer p { font-size: 12px; color: #6d797c; line-height: 1.6; }
+
+        /* Actions */
+        .actions { display: flex; gap: 16px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: none; }
+        .btn-primary { background: linear-gradient(135deg, #006874, #5cd7e9); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,104,116,0.3); }
+        .btn-secondary { background: white; border: 2px solid #006874; color: #006874; }
+        .btn-secondary:hover { background: rgba(0,104,116,0.05); }
+        .btn-emergency { background: linear-gradient(135deg, #ba1a1a, #ff6b6b); color: white; }
+        .btn-emergency:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(186,26,26,0.3); }
+
+        .footer { text-align: center; padding: 32px 24px; color: #6d797c; font-size: 12px; margin-top: 48px; border-top: 1px solid rgba(110,231,249,0.15); }
+        .footer a { color: #006874; text-decoration: none; margin: 0 8px; }
+
+        @media (max-width: 768px) { .nav { padding: 12px 20px; } .nav-links { display: none; } .main { padding: 24px 16px; } .result-header .disease-name { font-size: 28px; } .actions { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+        <div class="nav-links">
+            <a href="/">Home</a><a href="/diagnosis/">Diagnosis</a><a href="/ambulance/">Ambulance</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+        </div>
+        <a href="/dashboard/" style="padding: 8px 20px; border: 1.5px solid #006874; border-radius: 8px; color: #006874; text-decoration: none; font-size: 13px; font-weight: 600;">Dashboard</a>
+    </nav>
+
+    <main class="main">
+        <div class="result-header">
+            <div class="disease-name" id="diseaseName">Loading...</div>
+            <p class="result-desc" id="resultDesc"></p>
+            <div style="margin-top: 16px;">
+                <span class="severity-badge" id="severityBadge"></span>
+            </div>
+        </div>
+
+        <div class="confidence-section">
+            <div class="confidence-ring">
+                <svg width="180" height="180">
+                    <circle cx="90" cy="90" r="80" fill="none" stroke="#eaeff0" stroke-width="12"/>
+                    <circle cx="90" cy="90" r="80" fill="none" stroke="url(#grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="502" stroke-dashoffset="502" id="progressCircle"/>
+                    <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#006874"/>
+                        <stop offset="100%" style="stop-color:#5cd7e9"/>
+                    </linearGradient></defs>
+                </svg>
+                <div style="text-align: center;">
+                    <div class="score" id="confidenceScore">0%</div>
+                    <div class="label">Confidence</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="urgent-banner" id="urgentBanner">
+            <span class="material-icons">warning</span>
+            <div>
+                <strong>Urgent Care Required</strong>
+                <p>If you experience shortness of breath or persistent chest pain, seek immediate help.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="material-icons">checklist</span>Symptoms Analyzed</h3>
+            <div class="symptom-chips" id="symptomChips"></div>
+        </div>
+
+        <div class="card">
+            <h3><span class="material-icons">shield</span>Suggested Precautions</h3>
+            <ul class="precaution-list" id="precautionList"></ul>
+        </div>
+
+        <div class="card" id="secondaryCard" style="display:none;">
+            <h3><span class="material-icons">analytics</span>Other Possible Conditions</h3>
+            <div class="secondary-list" id="secondaryList"></div>
+        </div>
+
+        <div class="actions">
+            <a href="/diagnosis/" class="btn btn-primary"><span class="material-icons">replay</span>New Diagnosis</a>
+            <a href="/dashboard/" class="btn btn-secondary"><span class="material-icons">dashboard</span>Dashboard</a>
+            <a href="/ambulance/" class="btn btn-emergency"><span class="material-icons">emergency</span>Emergency Support</a>
+        </div>
+
+        <div class="disclaimer">
+            <h4>⚕️ AI Disclaimer</h4>
+            <p>This analysis is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Please consult with a licensed healthcare provider for definitive diagnosis.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2024 AI MedAssist. Human-centric healthcare AI.
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a>
+    </footer>
+
+    <script src="/static/js/api.js"></script>
+    <script>
+        const prediction = JSON.parse(localStorage.getItem('medassist_last_prediction') || 'null');
+        
+        if (!prediction) {
+            window.location.href = '/diagnosis/';
+        } else {
+            // Disease name
+            document.getElementById('diseaseName').textContent = prediction.predicted_disease;
+            document.getElementById('resultDesc').textContent = 
+                `Based on your reported symptoms, our AI model suggests a high probability of ${prediction.predicted_disease}.`;
+            
+            // Severity
+            const severityBadge = document.getElementById('severityBadge');
+            severityBadge.textContent = prediction.severity.toUpperCase();
+            severityBadge.className = `severity-badge severity-${prediction.severity}`;
+            
+            // Show urgent banner for high/critical
+            if (prediction.severity === 'high' || prediction.severity === 'critical') {
+                document.getElementById('urgentBanner').classList.add('show');
+            }
+            
+            // Confidence score animation
+            const score = prediction.confidence_score;
+            const circle = document.getElementById('progressCircle');
+            const scoreEl = document.getElementById('confidenceScore');
+            const circumference = 2 * Math.PI * 80;
+            const offset = circumference - (score / 100) * circumference;
+            
+            setTimeout(() => {
+                circle.style.transition = 'stroke-dashoffset 1.5s ease-out';
+                circle.style.strokeDashoffset = offset;
+            }, 300);
+            
+            let counter = 0;
+            const interval = setInterval(() => {
+                counter += 1;
+                if (counter >= score) { clearInterval(interval); counter = score; }
+                scoreEl.textContent = counter.toFixed(1) + '%';
+            }, 20);
+            
+            // Symptoms
+            const chips = document.getElementById('symptomChips');
+            (prediction.symptoms_analyzed || []).forEach(s => {
+                chips.innerHTML += `<span class="chip">${s.replace(/_/g, ' ')}</span>`;
+            });
+            
+            // Precautions
+            const precautionList = document.getElementById('precautionList');
+            const icons = ['hotel', 'water_drop', 'masks', 'medication', 'monitor_heart'];
+            (prediction.precautions || []).forEach((p, i) => {
+                precautionList.innerHTML += `
+                    <li class="precaution-item">
+                        <div class="precaution-icon"><span class="material-icons">${icons[i % icons.length]}</span></div>
+                        <div class="precaution-text">${p}</div>
+                    </li>`;
+            });
+            
+            // Secondary predictions
+            if (prediction.secondary_predictions && prediction.secondary_predictions.length > 0) {
+                document.getElementById('secondaryCard').style.display = 'block';
+                const secondaryList = document.getElementById('secondaryList');
+                prediction.secondary_predictions.forEach(sp => {
+                    secondaryList.innerHTML += `
+                        <div class="secondary-item">
+                            <span class="name">${sp.disease}</span>
+                            <span class="score">${sp.confidence}%</span>
+                        </div>`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

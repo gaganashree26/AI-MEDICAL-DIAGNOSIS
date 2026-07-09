@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Project | AI MedAssist</title>
+    <meta name="description" content="Learn about AI MedAssist - An AI-powered healthcare platform bridging clinical precision with human-centric empathy.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}body{font-family:'Manrope',sans-serif;background:#f5fafb;color:#171d1e}
+        .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(110,231,249,0.15);position:sticky;top:0;z-index:100}
+        .nav-brand{font-size:20px;font-weight:700;color:#006874;display:flex;align-items:center;gap:8px;text-decoration:none}.nav-brand .material-icons{color:#5cd7e9}
+        .nav-links{display:flex;gap:24px}.nav-links a{text-decoration:none;color:#3d494b;font-size:14px;font-weight:500;transition:color .3s}.nav-links a:hover,.nav-links a.active{color:#006874}
+        .hero-about{text-align:center;padding:80px 24px 48px;background:linear-gradient(180deg,rgba(110,231,249,0.06) 0%,transparent 100%)}
+        .hero-about h1{font-size:42px;font-weight:800;margin-bottom:16px}.hero-about h1 span{background:linear-gradient(135deg,#006874,#5cd7e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-about p{font-size:17px;color:#6d797c;max-width:700px;margin:0 auto;line-height:1.7}
+        .section{max-width:1100px;margin:0 auto;padding:48px 24px}
+        .card{background:rgba(255,255,255,0.8);backdrop-filter:blur(16px);border:1px solid rgba(110,231,249,0.2);border-radius:20px;padding:32px;box-shadow:0 10px 30px -5px rgba(110,231,249,0.1);margin-bottom:24px}
+        .card h2{font-size:22px;font-weight:700;color:#006874;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+        .card p,.card li{font-size:15px;color:#3d494b;line-height:1.7}
+        .card ul{list-style:none;margin-top:12px}.card ul li{padding:8px 0;padding-left:24px;position:relative}
+        .card ul li::before{content:'✦';position:absolute;left:0;color:#5cd7e9}
+        .tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+        .tech-item{background:rgba(110,231,249,0.06);border:1px solid rgba(110,231,249,0.15);border-radius:14px;padding:20px;text-align:center;transition:transform .3s}
+        .tech-item:hover{transform:translateY(-4px)}
+        .tech-item .material-icons{font-size:28px;color:#006874;margin-bottom:8px}
+        .tech-item h4{font-size:14px;font-weight:600;margin-bottom:4px}.tech-item p{font-size:12px;color:#6d797c}
+        .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+        .team-card{text-align:center;padding:24px;background:rgba(110,231,249,0.04);border-radius:16px}
+        .team-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#006874,#5cd7e9);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:700}
+        .team-card h4{font-size:15px;font-weight:600}.team-card p{font-size:12px;color:#6d797c}
+        .footer{text-align:center;padding:32px 24px;color:#6d797c;font-size:12px;margin-top:48px;border-top:1px solid rgba(110,231,249,0.15)}.footer a{color:#006874;text-decoration:none;margin:0 8px}
+        @media(max-width:768px){.nav{padding:12px 20px}.nav-links{display:none}.tech-grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:1fr}.hero-about h1{font-size:28px}}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+        <div class="nav-links"><a href="/">Home</a><a href="/diagnosis/">Diagnosis</a><a href="/ambulance/">Ambulance</a><a href="/about/" class="active">About</a><a href="/contact/">Contact</a></div>
+        <a href="/login/" style="padding:8px 20px;border:1.5px solid #006874;border-radius:8px;color:#006874;text-decoration:none;font-size:13px;font-weight:600;">Login</a>
+    </nav>
+    <section class="hero-about">
+        <h1>About <span>AI MedAssist</span></h1>
+        <p>An AI-powered healthcare web application that predicts diseases based on symptoms using Machine Learning models, designed to bridge the gap between clinical precision and human-centric empathy.</p>
+    </section>
+    <div class="section">
+        <div class="card">
+            <h2><span class="material-icons">lightbulb</span>Project Objective</h2>
+            <p>AI MedAssist is designed to make healthcare accessible to everyone, especially in rural and underserved regions where medical professionals are scarce. Using advanced ML algorithms (Random Forest + XGBoost ensemble), the system predicts diseases from symptoms with high confidence, provides precautionary advice, and supports multilingual voice input.</p>
+            <ul>
+                <li>Predict diseases from user-entered symptoms with 98%+ accuracy</li>
+                <li>Provide confidence scores for transparent AI-driven diagnosis</li>
+                <li>Support voice input for hands-free symptom entry</li>
+                <li>Offer precise healthcare guidance in English</li>
+                <li>Enable emergency ambulance dispatch</li>
+                <li>Maintain complete diagnosis history for users</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><span class="material-icons">architecture</span>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item"><span class="material-icons">code</span><h4>Django</h4><p>Backend Framework</p></div>
+                <div class="tech-item"><span class="material-icons">api</span><h4>DRF</h4><p>REST API Layer</p></div>
+                <div class="tech-item"><span class="material-icons">psychology</span><h4>Scikit-learn</h4><p>ML Models</p></div>
+                <div class="tech-item"><span class="material-icons">rocket_launch</span><h4>XGBoost</h4><p>Gradient Boosting</p></div>
+                <div class="tech-item"><span class="material-icons">html</span><h4>HTML/CSS/JS</h4><p>Frontend UI</p></div>
+                <div class="tech-item"><span class="material-icons">storage</span><h4>SQLite</h4><p>Database</p></div>
+                <div class="tech-item"><span class="material-icons">mic</span><h4>Web Speech</h4><p>Voice Input</p></div>
+                <div class="tech-item"><span class="material-icons">security</span><h4>JWT</h4><p>Authentication</p></div>
+            </div>
+        </div>
+        <div class="card">
+            <h2><span class="material-icons">schema</span>ML Pipeline</h2>
+            <p>The disease prediction pipeline uses an ensemble approach combining Random Forest (40% weight) and XGBoost (60% weight) classifiers trained on a curated dataset of 26 diseases and 100+ symptoms. The system:</p>
+            <ul>
+                <li>Converts symptom input into binary feature vectors</li>
+                <li>Runs predictions through both RF and XGBoost models</li>
+                <li>Computes weighted ensemble probabilities for each disease</li>
+                <li>Returns the top prediction with confidence score and alternatives</li>
+                <li>Determines severity level and maps appropriate precautions</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2><span class="material-icons">group</span>Project Team</h2>
+            <div class="team-grid">
+                <div class="team-card"><div class="team-avatar">A</div><h4>Developer</h4><p>Full Stack Development</p></div>
+                <div class="team-card"><div class="team-avatar">B</div><h4>ML Engineer</h4><p>Model Training & Tuning</p></div>
+                <div class="team-card"><div class="team-avatar">C</div><h4>UI Designer</h4><p>Frontend & UX Design</p></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">© 2024 AI MedAssist. Human-centric healthcare AI. <a href="#">Privacy Policy</a><a href="#">Terms of Service</a></footer>
+    <script src="/static/js/api.js"></script>
+</body>
+</html>

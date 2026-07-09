@@ -1,0 +1,205 @@
+{
+  "Influenza": [
+    "Rest for 8-10 hours daily",
+    "Increase fluid intake (water, herbal tea)",
+    "Wear a mask and avoid public spaces",
+    "Take prescribed antiviral medications",
+    "Monitor temperature regularly"
+  ],
+  "Common Cold": [
+    "Stay hydrated with warm fluids",
+    "Use saline nasal drops",
+    "Get adequate rest",
+    "Gargle with warm salt water",
+    "Use a humidifier"
+  ],
+  "Diabetes": [
+    "Monitor blood sugar levels regularly",
+    "Follow a low-sugar, balanced diet",
+    "Exercise for at least 30 minutes daily",
+    "Take insulin or medications as prescribed",
+    "Schedule regular check-ups"
+  ],
+  "Hypertension": [
+    "Reduce sodium intake",
+    "Exercise regularly",
+    "Manage stress through meditation",
+    "Take prescribed blood pressure medication",
+    "Avoid alcohol and smoking"
+  ],
+  "Malaria": [
+    "Use mosquito nets while sleeping",
+    "Take antimalarial medication as prescribed",
+    "Stay hydrated",
+    "Rest adequately",
+    "Seek immediate medical attention if symptoms worsen"
+  ],
+  "Typhoid": [
+    "Drink only purified water",
+    "Maintain strict hygiene",
+    "Take antibiotics as prescribed",
+    "Eat freshly prepared food",
+    "Rest completely until recovery"
+  ],
+  "Dengue": [
+    "Stay hydrated with ORS and fluids",
+    "Monitor platelet count regularly",
+    "Use mosquito repellent",
+    "Avoid aspirin and ibuprofen",
+    "Seek hospital care if symptoms worsen"
+  ],
+  "Pneumonia": [
+    "Take prescribed antibiotics completely",
+    "Rest and stay hydrated",
+    "Use a humidifier",
+    "Avoid smoking and secondhand smoke",
+    "Get a pneumococcal vaccine"
+  ],
+  "Tuberculosis": [
+    "Complete the full course of TB medication",
+    "Maintain good ventilation at home",
+    "Cover mouth when coughing",
+    "Get regular sputum tests",
+    "Eat nutritious food for recovery"
+  ],
+  "Asthma": [
+    "Carry a rescue inhaler at all times",
+    "Avoid known triggers (dust, smoke, pollen)",
+    "Use prescribed controller medications",
+    "Monitor peak flow readings",
+    "Create an asthma action plan with your doctor"
+  ],
+  "Gastroenteritis": [
+    "Stay hydrated with ORS solutions",
+    "Eat bland, easy-to-digest foods",
+    "Wash hands frequently",
+    "Avoid dairy products temporarily",
+    "Rest until symptoms subside"
+  ],
+  "Migraine": [
+    "Rest in a dark, quiet room",
+    "Apply cold or warm compresses",
+    "Stay hydrated",
+    "Take prescribed migraine medication early",
+    "Identify and avoid personal triggers"
+  ],
+  "Anemia": [
+    "Eat iron-rich foods (spinach, red meat, beans)",
+    "Take iron supplements as prescribed",
+    "Include vitamin C to improve iron absorption",
+    "Get regular blood tests",
+    "Avoid tea/coffee with meals"
+  ],
+  "Jaundice": [
+    "Rest completely",
+    "Follow a high-carbohydrate, low-fat diet",
+    "Avoid alcohol completely",
+    "Stay hydrated",
+    "Take prescribed medications regularly"
+  ],
+  "Urinary Tract Infection": [
+    "Drink plenty of water",
+    "Take prescribed antibiotics fully",
+    "Maintain personal hygiene",
+    "Avoid irritating feminine products",
+    "Urinate frequently, don't hold it in"
+  ],
+  "Chickenpox": [
+    "Keep the rash clean and dry",
+    "Use calamine lotion for itching",
+    "Avoid scratching blisters",
+    "Stay isolated until blisters crust over",
+    "Take prescribed antiviral medication"
+  ],
+  "Arthritis": [
+    "Exercise regularly with low-impact activities",
+    "Apply hot/cold therapy to joints",
+    "Maintain a healthy weight",
+    "Take anti-inflammatory medications as prescribed",
+    "Consider physical therapy"
+  ],
+  "Bronchitis": [
+    "Rest and drink plenty of fluids",
+    "Use a humidifier",
+    "Avoid smoking and irritants",
+    "Take prescribed cough suppressants",
+    "Use prescribed inhalers if needed"
+  ],
+  "Sinusitis": [
+    "Use saline nasal irrigation",
+    "Apply warm compresses to the face",
+    "Stay hydrated",
+    "Use prescribed nasal corticosteroids",
+    "Avoid allergens and irritants"
+  ],
+  "Allergic Rhinitis": [
+    "Avoid known allergens",
+    "Use antihistamine medications",
+    "Keep windows closed during high pollen days",
+    "Use air purifiers indoors",
+    "Consider allergy immunotherapy"
+  ],
+  "Conjunctivitis": [
+    "Wash hands frequently",
+    "Avoid touching eyes",
+    "Use prescribed eye drops",
+    "Don't share towels or pillows",
+    "Replace contact lenses and makeup"
+  ],
+  "Food Poisoning": [
+    "Stay hydrated with clear fluids",
+    "Eat bland foods when able to eat",
+    "Avoid dairy and spicy foods",
+    "Wash hands thoroughly",
+    "Seek medical help if symptoms persist 48+ hours"
+  ],
+  "Heart Disease": [
+    "Follow a heart-healthy diet",
+    "Exercise regularly as advised by doctor",
+    "Take all prescribed medications",
+    "Monitor blood pressure and cholesterol",
+    "Quit smoking immediately"
+  ],
+  "Kidney Disease": [
+    "Follow a kidney-friendly diet (low sodium, potassium)",
+    "Stay hydrated but don't overdrink",
+    "Take prescribed medications regularly",
+    "Monitor blood pressure",
+    "Get regular kidney function tests"
+  ],
+  "Hepatitis": [
+    "Avoid alcohol completely",
+    "Rest adequately",
+    "Eat a nutritious diet",
+    "Take prescribed antiviral medications",
+    "Practice safe hygiene to prevent spread"
+  ],
+  "COVID-19": [
+    "Isolate for recommended period",
+    "Monitor oxygen levels with a pulse oximeter",
+    "Stay hydrated and rest",
+    "Take prescribed medications",
+    "Seek emergency care if breathing difficulty worsens"
+  ],
+  "Thyroid Disorder": [
+    "Take thyroid medication as prescribed",
+    "Get regular thyroid function tests",
+    "Maintain a balanced diet with iodine",
+    "Exercise regularly",
+    "Monitor weight changes"
+  ],
+  "Appendicitis": [
+    "Seek immediate emergency medical care",
+    "Do not eat or drink before surgery",
+    "Surgery (appendectomy) is usually required",
+    "Follow post-surgery care instructions",
+    "Watch for signs of infection after surgery"
+  ],
+  "Meningitis": [
+    "Seek immediate emergency medical treatment",
+    "Take prescribed antibiotics/antivirals",
+    "Rest in a quiet, dark room",
+    "Stay hydrated",
+    "Get vaccinated for prevention"
+  ]
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambulance Support | AI MedAssist</title>
+    <meta name="description" content="AI MedAssist Emergency Ambulance Support - Request immediate medical transport assistance.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; min-height: 100vh; }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(110,231,249,0.15); position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 20px; font-weight: 700; color: #006874; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-brand .material-icons { color: #5cd7e9; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { text-decoration: none; color: #3d494b; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #006874; }
+        
+        .main { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+        .page-header { text-align: center; margin-bottom: 40px; }
+        .page-header h1 { font-size: 36px; font-weight: 700; color: #ba1a1a; margin-bottom: 8px; }
+        .page-header p { color: #6d797c; font-size: 15px; }
+        
+        .emergency-banner { background: linear-gradient(135deg, #ba1a1a, #ff6b6b); color: white; padding: 20px 28px; border-radius: 16px; display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+        .emergency-banner .material-icons { font-size: 36px; }
+        .emergency-banner h3 { font-size: 18px; margin-bottom: 4px; }
+        .emergency-banner p { font-size: 13px; opacity: 0.9; }
+        
+        .card { background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border: 1px solid rgba(110,231,249,0.2); border-radius: 20px; padding: 32px; box-shadow: 0 10px 30px -5px rgba(110,231,249,0.1); margin-bottom: 24px; }
+        .card h3 { font-size: 18px; font-weight: 600; color: #006874; margin-bottom: 20px; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #3d494b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #bcc9cb; border-radius: 10px; font-size: 14px; font-family: 'Manrope', sans-serif; background: #eff4f5; transition: all 0.3s; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #006874; background: white; box-shadow: 0 0 0 3px rgba(110,231,249,0.2); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        
+        .btn-emergency { width: 100%; padding: 16px; border: none; border-radius: 14px; background: linear-gradient(135deg, #ba1a1a, #ff6b6b); color: white; font-size: 17px; font-weight: 700; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-emergency:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(186,26,26,0.3); }
+        
+        /* Dispatch result */
+        .dispatch-result { display: none; }
+        .dispatch-result.show { display: block; }
+        .dispatch-card { background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(110,231,249,0.08)); border: 1px solid rgba(34,197,94,0.2); border-radius: 20px; padding: 28px; }
+        .dispatch-card h3 { color: #16a34a; }
+        .dispatch-detail { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(110,231,249,0.1); font-size: 14px; }
+        .dispatch-detail:last-child { border-bottom: none; }
+        .dispatch-detail .label { color: #6d797c; }
+        .dispatch-detail .value { font-weight: 600; }
+        
+        /* Emergency contacts */
+        .contacts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .contact-card { display: flex; align-items: center; gap: 12px; padding: 16px; background: rgba(110,231,249,0.06); border-radius: 12px; }
+        .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #006874, #5cd7e9); display: flex; align-items: center; justify-content: center; color: white; }
+        .contact-info h4 { font-size: 14px; font-weight: 600; }
+        .contact-info p { font-size: 13px; color: #006874; font-weight: 600; }
+        
+        .footer { text-align: center; padding: 32px 24px; color: #6d797c; font-size: 12px; margin-top: 48px; border-top: 1px solid rgba(110,231,249,0.15); }
+        .footer a { color: #006874; text-decoration: none; margin: 0 8px; }
+        
+        @media (max-width: 768px) { .nav { padding: 12px 20px; } .nav-links { display: none; } .form-row { grid-template-columns: 1fr; } .contacts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+        <div class="nav-links">
+            <a href="/">Home</a><a href="/diagnosis/">Diagnosis</a><a href="/ambulance/" class="active">Ambulance</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+        </div>
+        <a href="/dashboard/" style="padding:8px 20px; border:1.5px solid #006874; border-radius:8px; color:#006874; text-decoration:none; font-size:13px; font-weight:600;">Dashboard</a>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <h1>🚑 Emergency Ambulance Support</h1>
+            <p>Request immediate medical transport assistance in case of emergencies.</p>
+        </div>
+
+        <div class="emergency-banner">
+            <span class="material-icons">emergency</span>
+            <div>
+                <h3>For Life-Threatening Emergencies</h3>
+                <p>Call 108 (India) or your local emergency number immediately.</p>
+            </div>
+        </div>
+
+        <div id="requestForm">
+            <div class="card">
+                <h3>📋 Request Ambulance</h3>
+                <form id="ambulanceForm">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patient_name">Patient Name</label>
+                            <input type="text" id="patient_name" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_number">Contact Number</label>
+                            <input type="tel" id="contact_number" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Pickup Location</label>
+                        <input type="text" id="location" placeholder="Enter full address or landmark" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emergency_type">Emergency Type</label>
+                            <select id="emergency_type">
+                                <option value="other">Other Emergency</option>
+                                <option value="cardiac">Cardiac Emergency</option>
+                                <option value="accident">Accident / Trauma</option>
+                                <option value="respiratory">Respiratory Distress</option>
+                                <option value="stroke">Stroke</option>
+                                <option value="pregnancy">Pregnancy / Delivery</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>GPS Location</label>
+                            <button type="button" onclick="getLocation()" style="padding:12px 14px; background:#eff4f5; border:1.5px solid #bcc9cb; border-radius:10px; font-family:'Manrope',sans-serif; font-size:14px; cursor:pointer; width:100%; text-align:left; color:#3d494b;">
+                                📍 Detect My Location
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description (Optional)</label>
+                        <textarea id="description" placeholder="Describe the emergency situation..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-emergency" id="requestBtn">
+                        <span class="material-icons">emergency</span>
+                        Request Ambulance Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="dispatch-result" id="dispatchResult">
+            <div class="dispatch-card">
+                <h3>✅ Ambulance Dispatched!</h3>
+                <div class="dispatch-detail"><span class="label">Driver</span><span class="value" id="driverName">-</span></div>
+                <div class="dispatch-detail"><span class="label">Contact</span><span class="value" id="driverContact">-</span></div>
+                <div class="dispatch-detail"><span class="label">Vehicle</span><span class="value" id="vehicleNumber">-</span></div>
+                <div class="dispatch-detail"><span class="label">ETA</span><span class="value" id="eta">-</span></div>
+                <div class="dispatch-detail"><span class="label">Status</span><span class="value" id="dispatchStatus" style="color:#16a34a;">-</span></div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 32px;">
+            <h3>📞 Emergency Contacts</h3>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <div class="contact-icon"><span class="material-icons" style="font-size:20px;">emergency</span></div>
+                    <div class="contact-info"><h4>Ambulance</h4><p>108</p></div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon"><span class="material-icons" style="font-size:20px;">local_police</span></div>
+                    <div class="contact-info"><h4>Police</h4><p>100</p></div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon"><span class="material-icons" style="font-size:20px;">local_fire_department</span></div>
+                    <div class="contact-info"><h4>Fire</h4><p>101</p></div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon"><span class="material-icons" style="font-size:20px;">health_and_safety</span></div>
+                    <div class="contact-info"><h4>Health Helpline</h4><p>104</p></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">© 2024 AI MedAssist. Human-centric healthcare AI. <a href="#">Privacy</a> <a href="#">Terms</a></footer>
+
+    <script src="/static/js/api.js"></script>
+    <script>
+        let latitude = null, longitude = null;
+        
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        latitude = pos.coords.latitude;
+                        longitude = pos.coords.longitude;
+                        UIHelpers.showNotification('Location detected successfully!');
+                    },
+                    () => UIHelpers.showNotification('Could not detect location', 'warning')
+                );
+            }
+        }
+        
+        document.getElementById('ambulanceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('requestBtn');
+            UIHelpers.showLoading(btn, 'Dispatching...');
+            
+            try {
+                const result = await API.requestAmbulance({
+                    patient_name: document.getElementById('patient_name').value,
+                    contact_number: document.getElementById('contact_number').value,
+                    location: document.getElementById('location').value,
+                    latitude, longitude,
+                    emergency_type: document.getElementById('emergency_type').value,
+                    description: document.getElementById('description').value,
+                });
+                
+                if (result && result.status === 'success') {
+                    const data = result.data;
+                    document.getElementById('driverName').textContent = data.driver_name || 'Assigned';
+                    document.getElementById('driverContact').textContent = data.driver_contact || '-';
+                    document.getElementById('vehicleNumber').textContent = data.ambulance_number || '-';
+                    document.getElementById('eta').textContent = (data.estimated_arrival || '10') + ' minutes';
+                    document.getElementById('dispatchStatus').textContent = (data.status || 'dispatched').toUpperCase();
+                    
+                    document.getElementById('requestForm').style.display = 'none';
+                    document.getElementById('dispatchResult').classList.add('show');
+                    UIHelpers.showNotification('Ambulance dispatched successfully!');
+                } else {
+                    UIHelpers.showNotification(result?.message || 'Request failed', 'error');
+                    UIHelpers.hideLoading(btn);
+                }
+            } catch (err) {
+                UIHelpers.showNotification('Connection error', 'error');
+                UIHelpers.hideLoading(btn);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | AI MedAssist</title>
+    <meta name="description" content="Join AI MedAssist - Experience the future of human-centric healthcare AI.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        
+        .register-container { display: flex; width: 100%; max-width: 1100px; min-height: 700px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(110, 231, 249, 0.15); background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border: 1px solid rgba(110, 231, 249, 0.2); margin: 20px; }
+        
+        .register-visual { flex: 0.8; background: linear-gradient(135deg, #a78bfa, #5cd7e9, #006874); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; color: white; position: relative; overflow: hidden; }
+        .register-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 60%); }
+        .register-visual h1 { font-size: 32px; font-weight: 700; margin-bottom: 12px; position: relative; z-index: 1; }
+        .register-visual p { font-size: 15px; opacity: 0.9; text-align: center; max-width: 280px; line-height: 1.6; position: relative; z-index: 1; }
+        .register-visual .icon-wrap { width: 80px; height: 80px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; position: relative; z-index: 1; }
+        .register-visual .icon-wrap .material-icons { font-size: 40px; }
+        
+        .register-form-section { flex: 1.2; padding: 40px 48px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
+        .register-form-section h2 { font-size: 26px; font-weight: 700; color: #006874; margin-bottom: 4px; }
+        .register-form-section .subtitle { color: #6d797c; margin-bottom: 24px; font-size: 14px; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #3d494b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 14px; border: 1.5px solid #bcc9cb; border-radius: 10px; font-size: 14px; font-family: 'Manrope', sans-serif; background: #eff4f5; transition: all 0.3s; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: #006874; background: white; box-shadow: 0 0 0 3px rgba(110, 231, 249, 0.2); }
+        
+        .btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, #a78bfa, #5cd7e9); color: white; font-size: 16px; font-weight: 600; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(167, 139, 250, 0.3); }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        
+        .form-footer { margin-top: 20px; text-align: center; font-size: 14px; color: #6d797c; }
+        .form-footer a { color: #006874; font-weight: 600; text-decoration: none; }
+        
+        .form-error { background: #ffdad6; color: #93000a; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; display: none; }
+        
+        .page-footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; padding: 12px; font-size: 12px; color: #6d797c; background: rgba(245, 250, 251, 0.9); }
+        .page-footer a { color: #006874; text-decoration: none; margin: 0 8px; }
+        
+        @media (max-width: 768px) { .register-container { flex-direction: column; } .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-visual">
+            <div class="icon-wrap"><span class="material-icons">person_add</span></div>
+            <h1>Join AI MedAssist</h1>
+            <p>Experience the future of human-centric healthcare AI. Your health data is encrypted and HIPAA compliant.</p>
+        </div>
+        <div class="register-form-section">
+            <h2>Create Account</h2>
+            <p class="subtitle">Experience the future of human-centric healthcare AI.</p>
+            
+            <div class="form-error" id="registerError"></div>
+            
+            <form id="registerForm">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="First name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Last name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg_username">Username</label>
+                    <input type="text" id="reg_username" name="username" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg_password">Password</label>
+                        <input type="password" id="reg_password" name="password" placeholder="Min 8 characters" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" id="registerBtn">Create Account</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="/login/">Login</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        © 2024 AI MedAssist. Human-centric healthcare AI.
+        <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a>
+    </div>
+    
+    <script src="/static/js/api.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorDiv = document.getElementById('registerError');
+            const btn = document.getElementById('registerBtn');
+            
+            const data = {
+                first_name: document.getElementById('first_name').value.trim(),
+                last_name: document.getElementById('last_name').value.trim(),
+                username: document.getElementById('reg_username').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                gender: document.getElementById('gender').value,
+                password: document.getElementById('reg_password').value,
+                confirm_password: document.getElementById('confirm_password').value,
+            };
+            
+            if (data.password !== data.confirm_password) {
+                errorDiv.textContent = 'Passwords do not match.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            UIHelpers.showLoading(btn, 'Creating account...');
+            errorDiv.style.display = 'none';
+            
+            try {
+                const result = await API.register(data);
+                if (result && result.status === 'success') {
+                    UIHelpers.showNotification('Account created! Redirecting...');
+                    setTimeout(() => window.location.href = '/dashboard/', 1000);
+                } else {
+                    let msg = 'Registration failed.';
+                    if (result) {
+                        const errors = [];
+                        Object.entries(result).forEach(([key, val]) => {
+                            if (Array.isArray(val)) errors.push(val.join(', '));
+                            else if (typeof val === 'string') errors.push(val);
+                        });
+                        if (errors.length) msg = errors.join(' ');
+                    }
+                    errorDiv.textContent = msg;
+                    errorDiv.style.display = 'block';
+                    UIHelpers.hideLoading(btn);
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Connection error. Please try again.';
+                errorDiv.style.display = 'block';
+                UIHelpers.hideLoading(btn);
+            }
+        });
+        
+        if (API.isLoggedIn()) { window.location.href = '/dashboard/'; }
+    </script>
+</body>
+</html>

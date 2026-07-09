@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker | AI MedAssist</title>
+    <meta name="description" content="AI-powered symptom checker - Enter your symptoms for intelligent disease prediction with confidence scores.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; min-height: 100vh; }
+        
+        /* Navigation */
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(110, 231, 249, 0.15); position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 20px; font-weight: 700; color: #006874; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-brand .material-icons { color: #5cd7e9; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #3d494b; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #006874; }
+        .nav-auth { display: flex; gap: 12px; align-items: center; }
+        .nav-auth .btn-login { padding: 8px 20px; border: 1.5px solid #006874; border-radius: 8px; color: #006874; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.3s; }
+        .nav-auth .btn-login:hover { background: #006874; color: white; }
+
+        /* Language selector */
+        .lang-selector { display: flex; align-items: center; gap: 6px; }
+        .lang-selector select { padding: 6px 10px; border: 1px solid #bcc9cb; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 13px; background: #eff4f5; outline: none; cursor: pointer; }
+        
+        /* Main Content */
+        .main { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+        .page-header { text-align: center; margin-bottom: 40px; }
+        .page-header h1 { font-size: 36px; font-weight: 700; color: #006874; margin-bottom: 12px; }
+        .page-header p { color: #6d797c; font-size: 16px; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        
+        /* Symptom Input Card */
+        .input-card { background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border: 1px solid rgba(110, 231, 249, 0.2); border-radius: 24px; padding: 36px; box-shadow: 0 10px 30px -5px rgba(110, 231, 249, 0.1); margin-bottom: 32px; }
+        
+        .symptom-input-wrapper { position: relative; margin-bottom: 20px; }
+        .symptom-input { width: 100%; padding: 16px 50px 16px 20px; border: 2px solid #bcc9cb; border-radius: 14px; font-size: 16px; font-family: 'Manrope', sans-serif; background: #eff4f5; outline: none; transition: all 0.3s; }
+        .symptom-input:focus { border-color: #006874; background: white; box-shadow: 0 0 0 4px rgba(110, 231, 249, 0.15); }
+        .symptom-input::placeholder { color: #9ca3af; }
+        
+        .voice-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border: none; border-radius: 50%; background: linear-gradient(135deg, #006874, #5cd7e9); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .voice-btn:hover { transform: translateY(-50%) scale(1.1); box-shadow: 0 4px 15px rgba(0, 104, 116, 0.3); }
+        .voice-btn.listening { background: linear-gradient(135deg, #ba1a1a, #ff6b6b); animation: pulse 1s infinite; }
+        
+        /* Symptom Tags */
+        .symptom-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; min-height: 40px; }
+        .symptom-tag { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(135deg, rgba(110, 231, 249, 0.15), rgba(167, 139, 250, 0.1)); border: 1px solid rgba(110, 231, 249, 0.3); border-radius: 20px; font-size: 13px; font-weight: 500; color: #006874; animation: tagIn 0.3s ease-out; }
+        .symptom-tag .remove { cursor: pointer; width: 18px; height: 18px; border-radius: 50%; background: rgba(0, 104, 116, 0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; transition: background 0.2s; }
+        .symptom-tag .remove:hover { background: rgba(186, 26, 26, 0.2); color: #ba1a1a; }
+        
+        /* Suggestions dropdown */
+        .suggestions { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #bcc9cb; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 200px; overflow-y: auto; display: none; z-index: 50; margin-top: 4px; }
+        .suggestions.show { display: block; }
+        .suggestion-item { padding: 12px 16px; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+        .suggestion-item:hover { background: rgba(110, 231, 249, 0.1); color: #006874; }
+        
+        .btn-predict { width: 100%; padding: 16px; border: none; border-radius: 14px; background: linear-gradient(135deg, #006874, #5cd7e9); color: white; font-size: 17px; font-weight: 600; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-predict:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 104, 116, 0.3); }
+        .btn-predict:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        
+        /* Info Cards */
+        .info-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+        .info-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(110, 231, 249, 0.15); border-radius: 16px; padding: 20px; text-align: center; }
+        .info-card .material-icons { font-size: 28px; color: #006874; margin-bottom: 8px; }
+        .info-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .info-card p { font-size: 12px; color: #6d797c; }
+        
+        .hipaa-badge { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: rgba(110, 231, 249, 0.08); border-radius: 10px; font-size: 12px; color: #006874; font-weight: 500; margin-top: 16px; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 32px 24px; color: #6d797c; font-size: 12px; margin-top: 48px; border-top: 1px solid rgba(110, 231, 249, 0.15); }
+        .footer a { color: #006874; text-decoration: none; margin: 0 8px; }
+        
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(186, 26, 26, 0); } }
+        @keyframes tagIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @media (max-width: 768px) { .nav { padding: 12px 20px; } .nav-links { display: none; } .info-row { grid-template-columns: 1fr; } .main { padding: 24px 16px; } }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <nav class="nav">
+        <a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/diagnosis/" class="active">Diagnosis</a>
+            <a href="/ambulance/">Emergency Support</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+        </div>
+        <div class="nav-auth">
+            <div class="lang-selector">
+                <select id="langSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <a href="/dashboard/" class="btn-login" id="dashboardLink" style="display:none;">Dashboard</a>
+            <a href="/login/" class="btn-login" id="loginLink">Login</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <h1>🩺 AI Symptom Checker</h1>
+            <p>Input your symptoms below. Our clinical AI will analyze your data in real-time to provide immediate guidance.</p>
+        </div>
+        
+        <div class="input-card">
+            <div class="symptom-input-wrapper">
+                <input type="text" class="symptom-input" id="symptomInput" placeholder="Type a symptom (e.g., fever, headache, cough)..." autocomplete="off">
+                <button class="voice-btn" id="voiceBtn" title="Voice Input">
+                    <span class="material-icons" style="font-size: 20px;">mic</span>
+                </button>
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+            
+            <div class="symptom-tags" id="symptomTags">
+                <!-- Tags appear here -->
+            </div>
+            
+            <button class="btn-predict" id="predictBtn" disabled>
+                <span class="material-icons">psychology</span>
+                Analyze Symptoms
+            </button>
+            
+            <div class="hipaa-badge">
+                <span class="material-icons" style="font-size:16px;">verified_user</span>
+                HIPAA Compliant & Encrypted Analysis
+            </div>
+        </div>
+        
+        <div class="info-row">
+            <div class="info-card">
+                <span class="material-icons">psychology</span>
+                <h4>AI Logic</h4>
+                <p>Analyzing against 50k+ clinical patterns.</p>
+            </div>
+            <div class="info-card">
+                <span class="material-icons">priority_high</span>
+                <h4>Triage First</h4>
+                <p>Immediate alerts for urgent conditions.</p>
+            </div>
+            <div class="info-card">
+                <span class="material-icons">history</span>
+                <h4>Smart Tracking</h4>
+                <p>Symptom history saved to your profile.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2024 AI MedAssist. Human-centric healthcare AI.
+        <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> <a href="#">HIPAA Compliance</a>
+    </footer>
+
+    <script src="/static/js/api.js"></script>
+    <script>
+        // ── State ──
+        let selectedSymptoms = [];
+        let allSymptoms = [];
+        
+        // ── DOM ──
+        const symptomInput = document.getElementById('symptomInput');
+        const symptomTags = document.getElementById('symptomTags');
+        const suggestionsDiv = document.getElementById('suggestions');
+        const predictBtn = document.getElementById('predictBtn');
+        const voiceBtn = document.getElementById('voiceBtn');
+        
+        // ── Auth UI ──
+        if (API.isLoggedIn()) {
+            document.getElementById('loginLink').style.display = 'none';
+            document.getElementById('dashboardLink').style.display = '';
+        }
+        
+        // ── Load symptoms list ──
+        async function loadSymptoms() {
+            try {
+                const result = await API.getSymptomList();
+                if (result && result.status === 'success') {
+                    allSymptoms = result.data.symptoms;
+                }
+            } catch (e) {
+                console.log('Using offline symptom list');
+                allSymptoms = ['fever','cough','headache','fatigue','nausea','vomiting','diarrhea','chest_pain','sore_throat','runny_nose','body_ache','dizziness','shortness_of_breath','joint_pain','rash','sneezing','chills','sweating','weakness','stomach_pain','blurred_vision','weight_loss','high_fever','muscle_pain','congestion'];
+            }
+        }
+        loadSymptoms();
+        
+        // ── Symptom Input ──
+        symptomInput.addEventListener('input', () => {
+            const query = symptomInput.value.trim().toLowerCase();
+            if (query.length < 2) { suggestionsDiv.classList.remove('show'); return; }
+            
+            const matches = allSymptoms.filter(s => 
+                s.includes(query.replace(/\s/g, '_')) && !selectedSymptoms.includes(s)
+            ).slice(0, 8);
+            
+            if (matches.length === 0) { suggestionsDiv.classList.remove('show'); return; }
+            
+            suggestionsDiv.innerHTML = matches.map(s => 
+                `<div class="suggestion-item" onclick="addSymptom('${s}')">${s.replace(/_/g, ' ')}</div>`
+            ).join('');
+            suggestionsDiv.classList.add('show');
+        });
+        
+        symptomInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const val = symptomInput.value.trim().toLowerCase().replace(/\s+/g, '_');
+                if (val) addSymptom(val);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.symptom-input-wrapper')) suggestionsDiv.classList.remove('show');
+        });
+        
+        function addSymptom(symptom) {
+            if (selectedSymptoms.includes(symptom)) return;
+            selectedSymptoms.push(symptom);
+            renderTags();
+            symptomInput.value = '';
+            suggestionsDiv.classList.remove('show');
+            predictBtn.disabled = selectedSymptoms.length === 0;
+        }
+        
+        function removeSymptom(symptom) {
+            selectedSymptoms = selectedSymptoms.filter(s => s !== symptom);
+            renderTags();
+            predictBtn.disabled = selectedSymptoms.length === 0;
+        }
+        
+        function renderTags() {
+            symptomTags.innerHTML = selectedSymptoms.map(s => `
+                <span class="symptom-tag">
+                    ${s.replace(/_/g, ' ')}
+                    <span class="remove" onclick="removeSymptom('${s}')">✕</span>
+                </span>
+            `).join('');
+        }
+        
+        // ── Voice Input ──
+        const voiceSupported = VoiceService.init();
+        if (!voiceSupported) voiceBtn.style.display = 'none';
+        
+        voiceBtn.addEventListener('click', () => {
+            if (VoiceService.isListening) {
+                VoiceService.stop();
+                voiceBtn.classList.remove('listening');
+                symptomInput.placeholder = "Type a symptom (e.g., fever, headache, cough)...";
+            } else {
+                voiceBtn.classList.add('listening');
+                symptomInput.placeholder = "Listening... Speak your symptoms now";
+                symptomInput.value = "";
+                
+                VoiceService.start(
+                    async (transcript, isFinal) => {
+                        symptomInput.value = transcript;
+                        if (isFinal) {
+                            symptomInput.placeholder = "Processing voice...";
+                            // Process via voice API
+                            try {
+                                const result = await API.processVoiceInput(transcript);
+                                if (result && result.status === 'success') {
+                                    result.data.extracted_symptoms.forEach(s => addSymptom(s));
+                                    symptomInput.value = '';
+                                    UIHelpers.showNotification(`Extracted ${result.data.count} symptoms from voice`);
+                                }
+                            } catch (e) {
+                                // Fallback: add raw text as symptom
+                                const words = transcript.toLowerCase().split(/[,\s]+/).filter(w => w.length > 2);
+                                words.forEach(w => addSymptom(w.replace(/\s/g, '_')));
+                            }
+                            symptomInput.placeholder = "Type a symptom (e.g., fever, headache, cough)...";
+                        }
+                    },
+                    () => {
+                        voiceBtn.classList.remove('listening');
+                        if (symptomInput.placeholder.includes("Listening")) {
+                            symptomInput.placeholder = "Type a symptom (e.g., fever, headache, cough)...";
+                        }
+                    },
+                    (err) => {
+                        voiceBtn.classList.remove('listening');
+                        symptomInput.placeholder = "Type a symptom (e.g., fever, headache, cough)...";
+                        UIHelpers.showNotification('Voice recognition error: ' + err, 'error');
+                    }
+                );
+            }
+        });
+        
+        // ── Predict ──
+        predictBtn.addEventListener('click', async () => {
+            if (selectedSymptoms.length === 0) return;
+            
+            UIHelpers.showLoading(predictBtn, 'Analyzing...');
+            
+            try {
+                const lang = document.getElementById('langSelect').value;
+                const result = await API.predict(selectedSymptoms, lang);
+                
+                if (result && result.status === 'success') {
+                    // Store result and redirect to results page
+                    localStorage.setItem('medassist_last_prediction', JSON.stringify(result.data));
+                    window.location.href = '/result/';
+                } else {
+                    UIHelpers.showNotification(result?.message || 'Prediction failed', 'error');
+                    UIHelpers.hideLoading(predictBtn);
+                }
+            } catch (err) {
+                UIHelpers.showNotification('Error connecting to server', 'error');
+                UIHelpers.hideLoading(predictBtn);
+            }
+        });
+        
+        // ── Language ──
+        function changeLanguage(lang) {
+            VoiceService.setLanguage(lang);
+        }
+    </script>
+</body>
+</html>

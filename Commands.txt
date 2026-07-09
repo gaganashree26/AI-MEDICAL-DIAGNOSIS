@@ -1,0 +1,10 @@
+URL for the Web browser 
+- **Home**: http://127.0.0.1:8000/
+- **Login**: http://127.0.0.1:8000/login/
+- **Admin**: http://127.0.0.1:8000/admin/
+
+VENV Activation -
+venv\scripts\activate - 1
+
+Run Command -
+python manage.py runserver - 2

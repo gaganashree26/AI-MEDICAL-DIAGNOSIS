@@ -1,0 +1,146 @@
+Disease,Symptom_1,Symptom_2,Symptom_3,Symptom_4,Symptom_5
+Influenza,fever,cough,body_ache,fatigue,headache
+Influenza,fever,cough,sore_throat,runny_nose,fatigue
+Influenza,high_fever,chills,body_ache,headache,cough
+Influenza,fever,muscle_pain,fatigue,cough,sneezing
+Influenza,fever,headache,sore_throat,fatigue,body_ache
+Common Cold,sneezing,runny_nose,sore_throat,cough,mild_fever
+Common Cold,runny_nose,congestion,sneezing,sore_throat,cough
+Common Cold,sneezing,watery_eyes,sore_throat,mild_fever,congestion
+Common Cold,cough,runny_nose,sneezing,headache,sore_throat
+Common Cold,congestion,sore_throat,sneezing,runny_nose,mild_fever
+Diabetes,frequent_urination,increased_thirst,fatigue,blurred_vision,weight_loss
+Diabetes,increased_thirst,frequent_urination,fatigue,slow_healing,weight_loss
+Diabetes,fatigue,blurred_vision,frequent_urination,increased_thirst,numbness
+Diabetes,weight_loss,frequent_urination,increased_thirst,fatigue,blurred_vision
+Diabetes,increased_thirst,fatigue,frequent_urination,slow_healing,blurred_vision
+Hypertension,headache,dizziness,blurred_vision,chest_pain,shortness_of_breath
+Hypertension,headache,nosebleed,dizziness,chest_pain,fatigue
+Hypertension,dizziness,headache,chest_pain,shortness_of_breath,fatigue
+Hypertension,blurred_vision,headache,dizziness,nosebleed,chest_pain
+Hypertension,chest_pain,headache,dizziness,shortness_of_breath,fatigue
+Malaria,high_fever,chills,sweating,headache,nausea
+Malaria,fever,chills,sweating,vomiting,headache
+Malaria,high_fever,sweating,chills,body_ache,nausea
+Malaria,fever,headache,chills,sweating,fatigue
+Malaria,high_fever,chills,nausea,sweating,vomiting
+Typhoid,high_fever,weakness,stomach_pain,headache,loss_of_appetite
+Typhoid,fever,stomach_pain,weakness,constipation,headache
+Typhoid,high_fever,loss_of_appetite,weakness,stomach_pain,diarrhea
+Typhoid,fever,headache,stomach_pain,weakness,rash
+Typhoid,high_fever,weakness,loss_of_appetite,constipation,stomach_pain
+Dengue,high_fever,severe_headache,pain_behind_eyes,joint_pain,rash
+Dengue,fever,joint_pain,muscle_pain,rash,nausea
+Dengue,high_fever,pain_behind_eyes,severe_headache,joint_pain,fatigue
+Dengue,fever,rash,joint_pain,muscle_pain,vomiting
+Dengue,high_fever,severe_headache,joint_pain,pain_behind_eyes,bleeding_gums
+Pneumonia,cough,fever,chest_pain,shortness_of_breath,fatigue
+Pneumonia,high_fever,cough,chest_pain,difficulty_breathing,chills
+Pneumonia,fever,cough,phlegm,chest_pain,shortness_of_breath
+Pneumonia,cough,fever,fatigue,chest_pain,sweating
+Pneumonia,high_fever,cough,difficulty_breathing,chest_pain,body_ache
+Tuberculosis,persistent_cough,weight_loss,night_sweats,fever,blood_in_sputum
+Tuberculosis,cough,fever,night_sweats,fatigue,weight_loss
+Tuberculosis,persistent_cough,blood_in_sputum,night_sweats,fever,chest_pain
+Tuberculosis,weight_loss,fever,persistent_cough,night_sweats,fatigue
+Tuberculosis,night_sweats,persistent_cough,fever,weight_loss,loss_of_appetite
+Asthma,wheezing,shortness_of_breath,chest_tightness,cough,difficulty_breathing
+Asthma,cough,wheezing,shortness_of_breath,chest_tightness,fatigue
+Asthma,difficulty_breathing,wheezing,cough,chest_tightness,shortness_of_breath
+Asthma,wheezing,cough,chest_tightness,shortness_of_breath,anxiety
+Asthma,shortness_of_breath,wheezing,chest_tightness,cough,rapid_breathing
+Gastroenteritis,nausea,vomiting,diarrhea,stomach_pain,fever
+Gastroenteritis,vomiting,diarrhea,stomach_cramps,nausea,dehydration
+Gastroenteritis,diarrhea,nausea,vomiting,fever,stomach_pain
+Gastroenteritis,stomach_pain,vomiting,diarrhea,nausea,loss_of_appetite
+Gastroenteritis,nausea,diarrhea,vomiting,stomach_cramps,fever
+Migraine,severe_headache,nausea,sensitivity_to_light,blurred_vision,vomiting
+Migraine,throbbing_headache,nausea,sensitivity_to_light,dizziness,fatigue
+Migraine,severe_headache,sensitivity_to_light,nausea,vomiting,neck_stiffness
+Migraine,throbbing_headache,blurred_vision,nausea,sensitivity_to_light,fatigue
+Migraine,severe_headache,nausea,dizziness,sensitivity_to_light,vomiting
+Anemia,fatigue,weakness,pale_skin,shortness_of_breath,dizziness
+Anemia,weakness,fatigue,pale_skin,cold_hands,headache
+Anemia,fatigue,dizziness,pale_skin,shortness_of_breath,weakness
+Anemia,pale_skin,fatigue,weakness,cold_hands,brittle_nails
+Anemia,weakness,pale_skin,fatigue,headache,dizziness
+Jaundice,yellowing_skin,dark_urine,fatigue,nausea,abdominal_pain
+Jaundice,yellow_eyes,dark_urine,fatigue,loss_of_appetite,nausea
+Jaundice,yellowing_skin,yellow_eyes,dark_urine,itching,fatigue
+Jaundice,fatigue,dark_urine,yellowing_skin,abdominal_pain,nausea
+Jaundice,yellow_eyes,yellowing_skin,dark_urine,weight_loss,fatigue
+Urinary Tract Infection,burning_urination,frequent_urination,cloudy_urine,pelvic_pain,fever
+Urinary Tract Infection,burning_urination,frequent_urination,strong_urine_odor,pelvic_pain,blood_in_urine
+Urinary Tract Infection,frequent_urination,burning_urination,fever,cloudy_urine,back_pain
+Urinary Tract Infection,pelvic_pain,burning_urination,frequent_urination,cloudy_urine,nausea
+Urinary Tract Infection,burning_urination,frequent_urination,fever,pelvic_pain,fatigue
+Chickenpox,itchy_rash,fever,blisters,fatigue,headache
+Chickenpox,rash,fever,blisters,loss_of_appetite,body_ache
+Chickenpox,itchy_rash,blisters,fever,sore_throat,fatigue
+Chickenpox,fever,itchy_rash,blisters,headache,mild_fever
+Chickenpox,blisters,itchy_rash,fever,fatigue,loss_of_appetite
+Arthritis,joint_pain,stiffness,swelling,reduced_mobility,fatigue
+Arthritis,joint_pain,swelling,stiffness,morning_stiffness,warmth_in_joints
+Arthritis,stiffness,joint_pain,swelling,fatigue,reduced_mobility
+Arthritis,joint_pain,morning_stiffness,swelling,stiffness,redness
+Arthritis,swelling,joint_pain,stiffness,fatigue,warmth_in_joints
+Bronchitis,cough,phlegm,chest_discomfort,fatigue,shortness_of_breath
+Bronchitis,persistent_cough,phlegm,chest_discomfort,wheezing,fatigue
+Bronchitis,cough,chest_discomfort,phlegm,sore_throat,fatigue
+Bronchitis,wheezing,cough,phlegm,chest_discomfort,mild_fever
+Bronchitis,cough,phlegm,fatigue,chest_discomfort,body_ache
+Sinusitis,facial_pain,congestion,headache,runny_nose,cough
+Sinusitis,facial_pressure,congestion,headache,post_nasal_drip,fatigue
+Sinusitis,congestion,facial_pain,headache,sore_throat,cough
+Sinusitis,headache,facial_pain,congestion,runny_nose,fatigue
+Sinusitis,facial_pain,congestion,post_nasal_drip,headache,mild_fever
+Allergic Rhinitis,sneezing,runny_nose,itchy_eyes,congestion,watery_eyes
+Allergic Rhinitis,sneezing,itchy_nose,runny_nose,congestion,itchy_eyes
+Allergic Rhinitis,runny_nose,sneezing,watery_eyes,congestion,itchy_eyes
+Allergic Rhinitis,congestion,sneezing,itchy_eyes,runny_nose,post_nasal_drip
+Allergic Rhinitis,sneezing,runny_nose,congestion,watery_eyes,cough
+Conjunctivitis,red_eyes,itchy_eyes,watery_eyes,eye_discharge,swollen_eyelids
+Conjunctivitis,red_eyes,eye_discharge,itchy_eyes,sensitivity_to_light,watery_eyes
+Conjunctivitis,itchy_eyes,red_eyes,watery_eyes,eye_discharge,blurred_vision
+Conjunctivitis,red_eyes,swollen_eyelids,eye_discharge,itchy_eyes,tearing
+Conjunctivitis,eye_discharge,red_eyes,itchy_eyes,watery_eyes,crusting
+Food Poisoning,nausea,vomiting,diarrhea,stomach_cramps,fever
+Food Poisoning,vomiting,nausea,stomach_pain,diarrhea,dehydration
+Food Poisoning,diarrhea,vomiting,nausea,fever,weakness
+Food Poisoning,stomach_cramps,nausea,vomiting,diarrhea,headache
+Food Poisoning,nausea,diarrhea,vomiting,stomach_pain,chills
+Heart Disease,chest_pain,shortness_of_breath,fatigue,dizziness,palpitations
+Heart Disease,chest_pain,shortness_of_breath,sweating,nausea,arm_pain
+Heart Disease,fatigue,chest_pain,shortness_of_breath,swollen_legs,dizziness
+Heart Disease,palpitations,chest_pain,shortness_of_breath,fatigue,dizziness
+Heart Disease,chest_pain,arm_pain,shortness_of_breath,sweating,nausea
+Kidney Disease,swelling,fatigue,decreased_urination,nausea,back_pain
+Kidney Disease,blood_in_urine,swelling,fatigue,loss_of_appetite,nausea
+Kidney Disease,decreased_urination,swelling,nausea,fatigue,back_pain
+Kidney Disease,fatigue,swelling,decreased_urination,muscle_cramps,nausea
+Kidney Disease,swelling,back_pain,fatigue,nausea,decreased_urination
+Hepatitis,fatigue,jaundice,abdominal_pain,nausea,dark_urine
+Hepatitis,yellowing_skin,fatigue,loss_of_appetite,nausea,abdominal_pain
+Hepatitis,jaundice,fatigue,abdominal_pain,dark_urine,fever
+Hepatitis,nausea,fatigue,jaundice,abdominal_pain,joint_pain
+Hepatitis,fatigue,jaundice,dark_urine,loss_of_appetite,abdominal_pain
+COVID-19,fever,cough,fatigue,loss_of_taste,shortness_of_breath
+COVID-19,fever,dry_cough,loss_of_smell,fatigue,body_ache
+COVID-19,cough,fever,shortness_of_breath,loss_of_taste,sore_throat
+COVID-19,fatigue,fever,cough,loss_of_smell,headache
+COVID-19,fever,cough,loss_of_taste,loss_of_smell,fatigue
+Thyroid Disorder,fatigue,weight_gain,cold_sensitivity,dry_skin,hair_loss
+Thyroid Disorder,weight_gain,fatigue,constipation,dry_skin,depression
+Thyroid Disorder,fatigue,cold_sensitivity,weight_gain,hair_loss,muscle_weakness
+Thyroid Disorder,dry_skin,fatigue,weight_gain,constipation,cold_sensitivity
+Thyroid Disorder,hair_loss,fatigue,weight_gain,dry_skin,depression
+Appendicitis,abdominal_pain,nausea,vomiting,fever,loss_of_appetite
+Appendicitis,sharp_abdominal_pain,nausea,fever,vomiting,constipation
+Appendicitis,abdominal_pain,fever,nausea,bloating,loss_of_appetite
+Appendicitis,sharp_abdominal_pain,vomiting,nausea,fever,diarrhea
+Appendicitis,abdominal_pain,nausea,fever,vomiting,abdominal_swelling
+Meningitis,severe_headache,stiff_neck,fever,sensitivity_to_light,nausea
+Meningitis,high_fever,stiff_neck,severe_headache,confusion,vomiting
+Meningitis,fever,stiff_neck,severe_headache,sensitivity_to_light,rash
+Meningitis,severe_headache,fever,stiff_neck,nausea,drowsiness
+Meningitis,stiff_neck,high_fever,severe_headache,vomiting,sensitivity_to_light

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | AI MedAssist</title>
+    <meta name="description" content="Login to AI MedAssist - Your intelligent medical diagnosis assistant powered by machine learning.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        
+        .login-container { display: flex; width: 100%; max-width: 1100px; min-height: 600px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(110, 231, 249, 0.15); background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border: 1px solid rgba(110, 231, 249, 0.2); margin: 20px; }
+        
+        .login-visual { flex: 1; background: linear-gradient(135deg, #006874, #5cd7e9, #a78bfa); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; color: white; position: relative; overflow: hidden; }
+        .login-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 60%); }
+        .login-visual h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; position: relative; z-index: 1; }
+        .login-visual p { font-size: 16px; opacity: 0.9; text-align: center; max-width: 300px; line-height: 1.6; position: relative; z-index: 1; }
+        .login-visual .pulse-icon { width: 80px; height: 80px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; animation: pulse 2s infinite; position: relative; z-index: 1; }
+        .login-visual .pulse-icon .material-icons { font-size: 40px; }
+        
+        .login-form-section { flex: 1; padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+        .login-form-section h2 { font-size: 28px; font-weight: 700; color: #006874; margin-bottom: 8px; }
+        .login-form-section .subtitle { color: #6d797c; margin-bottom: 32px; font-size: 14px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #3d494b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-group input { width: 100%; padding: 14px 16px; border: 1.5px solid #bcc9cb; border-radius: 12px; font-size: 15px; font-family: 'Manrope', sans-serif; background: #eff4f5; transition: all 0.3s; outline: none; }
+        .form-group input:focus { border-color: #006874; background: white; box-shadow: 0 0 0 3px rgba(110, 231, 249, 0.2); }
+        
+        .btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, #006874, #5cd7e9); color: white; font-size: 16px; font-weight: 600; font-family: 'Manrope', sans-serif; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 104, 116, 0.3); }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        
+        .form-footer { margin-top: 24px; text-align: center; font-size: 14px; color: #6d797c; }
+        .form-footer a { color: #006874; font-weight: 600; text-decoration: none; }
+        .form-footer a:hover { text-decoration: underline; }
+        
+        .error-message { color: #ba1a1a; font-size: 13px; margin-top: 6px; display: none; }
+        .form-error { background: #ffdad6; color: #93000a; padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; display: none; }
+        
+        .page-footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; padding: 12px; font-size: 12px; color: #6d797c; background: rgba(245, 250, 251, 0.9); }
+        .page-footer a { color: #006874; text-decoration: none; margin: 0 8px; }
+        
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @media (max-width: 768px) { .login-container { flex-direction: column; } .login-visual { padding: 32px; min-height: 200px; } }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-visual">
+            <div class="pulse-icon">
+                <span class="material-icons">medical_services</span>
+            </div>
+            <h1>AI MedAssist</h1>
+            <p>Access your clinical intelligence dashboard. Powered by advanced machine learning.</p>
+        </div>
+        <div class="login-form-section">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Access your clinical intelligence dashboard</p>
+            
+            <div class="form-error" id="loginError"></div>
+            
+            <form id="loginForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Don't have an account? <a href="/register/">Register</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        © 2024 AI MedAssist. Human-centric healthcare AI.
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">HIPAA Compliance</a>
+    </div>
+    
+    <script src="/static/js/api.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorDiv = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            UIHelpers.showLoading(btn, 'Signing in...');
+            errorDiv.style.display = 'none';
+            
+            try {
+                const result = await API.login(username, password);
+                if (result && result.status === 'success') {
+                    UIHelpers.showNotification('Login successful! Redirecting...');
+                    setTimeout(() => window.location.href = '/dashboard/', 1000);
+                } else {
+                    const msg = result?.non_field_errors?.[0] || result?.detail || result?.message || 'Invalid credentials.';
+                    errorDiv.textContent = typeof msg === 'object' ? JSON.stringify(msg) : msg;
+                    errorDiv.style.display = 'block';
+                    UIHelpers.hideLoading(btn);
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Connection error. Please check if the server is running.';
+                errorDiv.style.display = 'block';
+                UIHelpers.hideLoading(btn);
+            }
+        });
+        
+        // Redirect if already logged in
+        if (API.isLoggedIn()) { window.location.href = '/dashboard/'; }
+    </script>
+</body>
+</html>

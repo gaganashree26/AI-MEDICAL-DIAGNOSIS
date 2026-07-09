@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MedAssist - Smart Medical Diagnosis</title>
+    <meta name="description" content="AI MedAssist - Predict diseases intelligently using Machine Learning. Clinical-grade AI analyzes symptoms in seconds.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Manrope', sans-serif; background: #f5fafb; color: #171d1e; }
+        
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(110,231,249,0.15); position: sticky; top: 0; z-index: 100; }
+        .nav-brand { font-size: 20px; font-weight: 700; color: #006874; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-brand .material-icons { color: #5cd7e9; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { text-decoration: none; color: #3d494b; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #006874; }
+        .nav-actions { display: flex; gap: 12px; }
+        .btn-nav { padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.3s; }
+        .btn-nav-outline { border: 1.5px solid #006874; color: #006874; }
+        .btn-nav-outline:hover { background: #006874; color: white; }
+        .btn-nav-filled { background: linear-gradient(135deg, #006874, #5cd7e9); color: white; border: none; }
+
+        /* Hero */
+        .hero { text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at center, rgba(110,231,249,0.08) 0%, transparent 60%); }
+        .hero h1 { font-size: 48px; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 20px; position: relative; }
+        .hero h1 span { background: linear-gradient(135deg, #006874, #5cd7e9, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 18px; color: #6d797c; max-width: 600px; margin: 0 auto 32px; line-height: 1.6; position: relative; }
+        .hero-stats { display: flex; gap: 32px; justify-content: center; margin-bottom: 32px; position: relative; }
+        .hero-stat { text-align: center; }
+        .hero-stat .value { font-size: 24px; font-weight: 800; color: #006874; }
+        .hero-stat .label { font-size: 12px; color: #6d797c; text-transform: uppercase; letter-spacing: 0.05em; }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; position: relative; }
+        .btn-hero { padding: 16px 32px; border-radius: 14px; font-size: 16px; font-weight: 600; font-family: 'Manrope', sans-serif; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; }
+        .btn-hero-primary { background: linear-gradient(135deg, #006874, #5cd7e9); color: white; box-shadow: 0 8px 25px rgba(0,104,116,0.2); }
+        .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,104,116,0.3); }
+        .btn-hero-secondary { background: white; border: 2px solid #006874; color: #006874; }
+        .btn-hero-secondary:hover { background: rgba(0,104,116,0.05); }
+
+        /* Features */
+        .section { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+        .section-header p { color: #6d797c; font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(110,231,249,0.15); border-radius: 20px; padding: 28px; transition: all 0.3s; text-align: center; }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(110,231,249,0.15); border-color: rgba(110,231,249,0.3); }
+        .feature-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, rgba(110,231,249,0.15), rgba(167,139,250,0.1)); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .feature-icon .material-icons { font-size: 28px; color: #006874; }
+        .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 13px; color: #6d797c; line-height: 1.6; }
+
+        /* How it works */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .step { text-align: center; position: relative; }
+        .step-number { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #006874, #5cd7e9); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 16px; }
+        .step h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .step p { font-size: 13px; color: #6d797c; line-height: 1.6; }
+
+        /* Emergency banner */
+        .emergency-section { background: linear-gradient(135deg, #ba1a1a, #ff6b6b); color: white; padding: 40px; border-radius: 24px; margin: 48px auto; max-width: 1000px; display: flex; align-items: center; gap: 24px; }
+        .emergency-section .material-icons { font-size: 48px; }
+        .emergency-section h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .emergency-section p { font-size: 14px; opacity: 0.9; }
+        .emergency-section a { color: white; background: rgba(255,255,255,0.2); padding: 10px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; margin-top: 12px; display: inline-block; transition: background 0.3s; }
+        .emergency-section a:hover { background: rgba(255,255,255,0.3); }
+
+        /* Footer */
+        .footer { background: #171d1e; color: #bcc9cb; padding: 48px 24px 24px; margin-top: 64px; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand { font-size: 20px; font-weight: 700; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .footer-desc { font-size: 13px; line-height: 1.6; }
+        .footer h5 { color: white; font-size: 14px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 8px; }
+        .footer ul a { color: #bcc9cb; text-decoration: none; font-size: 13px; transition: color 0.3s; }
+        .footer ul a:hover { color: #5cd7e9; }
+        .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions { display: none; }
+            .hero h1 { font-size: 28px; }
+            .features-grid, .steps-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .emergency-section { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <nav class="nav">
+        <a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a><a href="#features">Features</a><a href="/diagnosis/">Diagnosis</a><a href="/ambulance/">Ambulance</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <a href="/login/" class="btn-nav btn-nav-outline">Login</a>
+            <a href="/register/" class="btn-nav btn-nav-filled">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Predict Diseases <span>Intelligently</span><br>Using Machine Learning</h1>
+        <p>Our clinical-grade AI analyzes symptoms in seconds to provide reliable healthcare insights for everyone.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="value">98.4%</div><div class="label">AI Confidence</div></div>
+            <div class="hero-stat"><div class="value">26+</div><div class="label">Diseases</div></div>
+            <div class="hero-stat"><div class="value">100+</div><div class="label">Symptoms</div></div>
+        </div>
+        <div class="hero-cta">
+            <a href="/diagnosis/" class="btn-hero btn-hero-primary"><span class="material-icons">psychology</span>Start Diagnosis</a>
+            <a href="/about/" class="btn-hero btn-hero-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <h2>Core Features</h2>
+            <p>Bridging the gap between clinical precision and human-centric empathy.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">biotech</span></div>
+                <h3>Disease Prediction</h3>
+                <p>ML models trained on clinical records to identify patterns and early signs of illness.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">mic</span></div>
+                <h3>Voice Input</h3>
+                <p>Natural language processing allows patients to describe symptoms hands-free.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">verified</span></div>
+                <h3>AI Confidence Score</h3>
+                <p>Every diagnosis comes with a transparency rating for reliability insights.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">public</span></div>
+                <h3>Rural Healthcare</h3>
+                <p>Optimized for low-bandwidth environments, bringing diagnostics to remote regions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">translate</span></div>
+                <h3>International Support</h3>
+                <p>Accessible healthcare platform designed for global accessibility in English.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><span class="material-icons">emergency</span></div>
+                <h3>Emergency Support</h3>
+                <p>Immediate ambulance dispatch for urgent medical conditions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Three simple steps to get your AI-powered health assessment.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Input Symptoms</h4>
+                <p>Speak or type your symptoms into the intuitive interface.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>AI Processing</h4>
+                <p>Our engine compares data against clinical databases in real-time.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Smart Diagnosis</h4>
+                <p>Receive a detailed health report with recommended next steps.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency -->
+    <section style="padding: 0 24px;">
+        <div class="emergency-section">
+            <span class="material-icons">emergency</span>
+            <div>
+                <h3>Emergency Ambulance Support</h3>
+                <p>In case of urgent medical needs, our system immediately routes your location to the nearest ambulance unit.</p>
+                <a href="/ambulance/">Request Ambulance →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand"><span class="material-icons" style="color:#5cd7e9;">medical_services</span>AI MedAssist</div>
+                <p class="footer-desc">Empowering healthcare through clinical-grade artificial intelligence and human-centric design.</p>
+            </div>
+            <div>
+                <h5>Platform</h5>
+                <ul>
+                    <li><a href="/diagnosis/">Diagnosis</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="/dashboard/">Dashboard</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Compliance</h5>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">HIPAA Compliance</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="/contact/">Contact Support</a></li>
+                    <li><a href="/rural-healthcare/">Rural Outreach</a></li>
+                    <li><a href="/about/">About</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2024 AI MedAssist. Human-centric healthcare AI.</div>
+    </footer>
+
+    <script src="/static/js/api.js"></script>
+</body>
+</html>

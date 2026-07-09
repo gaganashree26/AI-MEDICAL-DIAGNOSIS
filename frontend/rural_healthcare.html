@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rural Healthcare | AI MedAssist</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}body{font-family:'Manrope',sans-serif;background:#f5fafb;color:#171d1e}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(110,231,249,0.15);position:sticky;top:0;z-index:100}
+.nav-brand{font-size:20px;font-weight:700;color:#006874;display:flex;align-items:center;gap:8px;text-decoration:none}.nav-brand .material-icons{color:#5cd7e9}
+.nav-links{display:flex;gap:24px}.nav-links a{text-decoration:none;color:#3d494b;font-size:14px;font-weight:500}.nav-links a:hover{color:#006874}
+.hero{text-align:center;padding:80px 24px 48px;background:linear-gradient(180deg,rgba(110,231,249,0.06) 0%,transparent 100%)}
+.hero h1{font-size:42px;font-weight:800;margin-bottom:16px;color:#006874}.hero p{font-size:17px;color:#6d797c;max-width:700px;margin:0 auto;line-height:1.7}
+.section{max-width:1100px;margin:0 auto;padding:48px 24px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.feature{background:rgba(255,255,255,0.7);backdrop-filter:blur(12px);border:1px solid rgba(110,231,249,0.15);border-radius:20px;padding:28px;text-align:center;transition:transform .3s}
+.feature:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(110,231,249,0.15)}
+.feature-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(110,231,249,0.15),rgba(167,139,250,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.feature-icon .material-icons{font-size:28px;color:#006874}
+.feature h3{font-size:16px;font-weight:600;margin-bottom:8px}.feature p{font-size:13px;color:#6d797c;line-height:1.6}
+.card{background:rgba(255,255,255,0.8);backdrop-filter:blur(16px);border:1px solid rgba(110,231,249,0.2);border-radius:20px;padding:32px;box-shadow:0 10px 30px -5px rgba(110,231,249,0.1);margin-bottom:24px}
+.card h2{font-size:22px;font-weight:700;color:#006874;margin-bottom:16px}
+.card p{font-size:15px;color:#3d494b;line-height:1.7;margin-bottom:12px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.stat{text-align:center;padding:20px;background:rgba(110,231,249,0.06);border-radius:14px}
+.stat .val{font-size:28px;font-weight:800;color:#006874}.stat .lbl{font-size:12px;color:#6d797c;text-transform:uppercase;letter-spacing:.05em}
+.cta{text-align:center;margin:48px 0}
+.cta a{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:14px;background:linear-gradient(135deg,#006874,#5cd7e9);color:white;text-decoration:none;font-size:16px;font-weight:600;transition:all .3s}
+.cta a:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,104,116,0.3)}
+.footer{text-align:center;padding:32px 24px;color:#6d797c;font-size:12px;margin-top:48px;border-top:1px solid rgba(110,231,249,0.15)}.footer a{color:#006874;text-decoration:none;margin:0 8px}
+@media(max-width:768px){.nav{padding:12px 20px}.nav-links{display:none}.features{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+<nav class="nav"><a href="/" class="nav-brand"><span class="material-icons">medical_services</span>AI MedAssist</a>
+<div class="nav-links"><a href="/">Home</a><a href="/diagnosis/">Diagnosis</a><a href="/ambulance/">Ambulance</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
+<a href="/login/" style="padding:8px 20px;border:1.5px solid #006874;border-radius:8px;color:#006874;text-decoration:none;font-size:13px;font-weight:600;">Login</a></nav>
+<section class="hero">
+<h1>🏥 Rural Healthcare Support</h1>
+<p>Bringing world-class AI-powered diagnostics to underserved rural communities where access to healthcare professionals is limited.</p>
+</section>
+<div class="section">
+<div class="stats-row">
+<div class="stat"><div class="val">65%</div><div class="lbl">Rural India Population</div></div>
+<div class="stat"><div class="val">1:25000</div><div class="lbl">Doctor-Patient Ratio</div></div>
+<div class="stat"><div class="val">26+</div><div class="lbl">Diseases Covered</div></div>
+<div class="stat"><div class="val">3</div><div class="lbl">Languages Supported</div></div>
+</div>
+<div class="features">
+<div class="feature"><div class="feature-icon"><span class="material-icons">signal_cellular_alt</span></div><h3>Low Bandwidth Ready</h3><p>Optimized for 2G/3G networks common in rural areas.</p></div>
+<div class="feature"><div class="feature-icon"><span class="material-icons">translate</span></div><h3>English Accessibility</h3><p>Simplified medical terms for clear communication in English.</p></div>
+<div class="feature"><div class="feature-icon"><span class="material-icons">mic</span></div><h3>Voice-First Design</h3><p>Speak symptoms naturally without typing literacy barriers.</p></div>
+<div class="feature"><div class="feature-icon"><span class="material-icons">savings</span></div><h3>Free to Use</h3><p>No cost for basic diagnosis, making healthcare affordable.</p></div>
+<div class="feature"><div class="feature-icon"><span class="material-icons">local_hospital</span></div><h3>PHC Integration</h3><p>Connects with Primary Health Centers for follow-up care.</p></div>
+<div class="feature"><div class="feature-icon"><span class="material-icons">emergency</span></div><h3>Emergency Routing</h3><p>Automatic ambulance dispatch for critical conditions.</p></div>
+</div>
+<div class="card">
+<h2>Our Mission</h2>
+<p>In rural India, over 65% of the population lacks access to quality healthcare. AI MedAssist aims to bridge this gap by providing instant, reliable disease predictions through a simple, voice-enabled interface accessible on basic smartphones.</p>
+<p>Our system is designed to work as a first-response health tool — guiding patients on urgency, precautions, and when to seek professional care. This can save lives in areas where the nearest hospital may be hours away.</p>
+</div>
+<div class="cta"><a href="/diagnosis/"><span class="material-icons">psychology</span>Try Free Diagnosis Now</a></div>
+</div>
+<footer class="footer">© 2024 AI MedAssist. <a href="#">Privacy</a><a href="#">Terms</a></footer>
+<script src="/static/js/api.js"></script>
+</body></html>
